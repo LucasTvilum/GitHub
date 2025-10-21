@@ -1,0 +1,40 @@
+﻿@page "/counter"
+@inject Blazored.LocalStorage.ILocalStorageService localStore
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">
+    Current count:
+    <span style="@CountStyle">@currentCount</span>
+</p>
+
+<button class="btn btn-primary me-2" @onclick="IncrementCount">Click me</button>
+<button class="btn btn-outline-secondary" @onclick="ResetCount">Reset</button>
+
+@code {
+    const string key = "Counter.currentCount";
+    int currentCount = Random.Shared.Next(0, 31);
+
+    string CountStyle => currentCount == 16 ? "color:red;font-weight:700" : "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (await localStore.ContainKeyAsync(key))
+            currentCount = await localStore.GetItemAsync<int>(key);
+        else
+            await localStore.SetItemAsync(key, currentCount);
+    }
+
+    public async Task IncrementCount()
+    {
+        currentCount += 9;
+        await localStore.SetItemAsync(key, currentCount);
+    }
+
+    public async Task ResetCount()
+    {
+        currentCount = 0;
+        await localStore.SetItemAsync(key, currentCount);
+    }
+}

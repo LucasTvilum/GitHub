@@ -1,0 +1,581 @@
+
+/* ========== IMPONERENDE Vietnamesisk Comedy Todo Style! 🎭🇻🇳 ========== */
+
+:host {
+    --red: #da251d;        /* Vietnamese flag red */
+    --yellow: #ffcd00;     /* Vietnamese flag yellow */
+    --gold: #ffd700;       /* Gold */
+    --green: #00a651;      /* Tropical green */
+    --orange: #ff6b35;     /* Bánh mì orange */
+    --pink: #ff1493;       /* Hot pink */
+    --purple: #9b59b6;     /* Purple */
+    --cyan: #00d4ff;       /* Mekong river cyan */
+    --white: #fff5e1;      /* Rice white */
+    display: block;
+    min-height: 100vh;
+    padding: 2rem;
+    background:
+            radial-gradient(circle at 20% 50%, rgba(255,20,147,0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(255,215,0,0.15) 0%, transparent 50%),
+            radial-gradient(circle at 40% 80%, rgba(0,166,81,0.15) 0%, transparent 50%),
+            repeating-linear-gradient(45deg, transparent, transparent 50px, rgba(255,205,0,0.03) 50px, rgba(255,205,0,0.03) 100px),
+            linear-gradient(135deg, #ff6b35 0%, #ffcd00 25%, #00a651 50%, #00d4ff 75%, #da251d 100%);
+    background-size: 200% 200%;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive, sans-serif;
+    animation: gradient-party 15s ease infinite;
+}
+
+@keyframes gradient-party {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Header - MEGA IMPRESSIVE! */
+h1 {
+    margin: 0 0 2rem 0;
+    font-family: Impact, 'Arial Black', 'Helvetica Inserat', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 900;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, var(--red), var(--yellow), var(--green), var(--cyan), var(--pink), var(--purple));
+    background-size: 300% 300%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow:
+            4px 4px 0 rgba(218,37,29,0.3),
+            8px 8px 0 rgba(255,205,0,0.3),
+            12px 12px 0 rgba(0,166,81,0.3),
+            16px 16px 30px rgba(0,0,0,0.5);
+    transform: rotate(-3deg) scale(1);
+    animation: rainbow-text 8s ease infinite, mega-wobble 4s ease-in-out infinite;
+    letter-spacing: 3px;
+    filter: drop-shadow(0 0 30px rgba(255,215,0,0.8));
+}
+
+@keyframes rainbow-text {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes mega-wobble {
+    0%, 100% { transform: rotate(-3deg) scale(1) translateY(0); }
+    25% { transform: rotate(3deg) scale(1.08) translateY(-10px); }
+    50% { transform: rotate(-2deg) scale(1.05) translateY(-5px); }
+    75% { transform: rotate(2deg) scale(1.06) translateY(-8px); }
+}
+
+/* Card wrapper - Vietnamese Night Market Explosion! */
+.todo-card {
+    max-width: 1000px;
+    margin: 0 auto;
+    background:
+            repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 20px, transparent 20px, transparent 40px),
+            repeating-linear-gradient(-45deg, rgba(255,215,0,0.05) 0px, rgba(255,215,0,0.05) 20px, transparent 20px, transparent 40px),
+            linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,245,225,0.95) 100%);
+    border: 8px solid transparent;
+    border-image: linear-gradient(45deg, var(--red), var(--yellow), var(--green), var(--cyan), var(--pink)) 1;
+    border-radius: 40px;
+    box-shadow:
+            0 0 0 4px white,
+            0 0 0 12px var(--yellow),
+            0 0 0 16px var(--red),
+            0 0 0 20px var(--green),
+            0 0 60px rgba(255,215,0,0.6),
+            20px 20px 0 16px rgba(0,0,0,0.08),
+            0 30px 60px rgba(0,0,0,0.3);
+    padding: 2.5rem;
+    transform: rotate(2deg);
+    position: relative;
+    animation: card-float 6s ease-in-out infinite;
+}
+
+@keyframes card-float {
+    0%, 100% { transform: rotate(2deg) translateY(0); }
+    50% { transform: rotate(-1deg) translateY(-15px); }
+}
+
+.todo-card::before {
+    content: "🎭🎪🎨";
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4rem;
+    animation: emoji-party 3s ease infinite;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+}
+
+@keyframes emoji-party {
+    0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg) scale(1); }
+    25% { transform: translateX(-50%) translateY(-15px) rotate(-15deg) scale(1.2); }
+    50% { transform: translateX(-50%) translateY(-5px) rotate(15deg) scale(1.1); }
+    75% { transform: translateX(-50%) translateY(-12px) rotate(-10deg) scale(1.15); }
+}
+
+.todo-card::after {
+    content: "🍜🥖☕🏮🎋";
+    position: absolute;
+    bottom: -25px;
+    right: 30px;
+    font-size: 2rem;
+    opacity: 0.5;
+    letter-spacing: 15px;
+    animation: lantern-sway 4s ease-in-out infinite;
+}
+
+@keyframes lantern-sway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+/* Input row */
+.todo-input-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.todo-input {
+    background: linear-gradient(145deg, #ffffff 0%, #fffef8 100%);
+    color: #333;
+    border: 5px solid var(--orange);
+    border-radius: 25px;
+    padding: 1.2rem 1.5rem;
+    outline: none;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    box-shadow:
+            6px 6px 0 var(--pink),
+            12px 12px 25px rgba(0,0,0,0.2);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.todo-input::placeholder {
+    color: var(--orange);
+    opacity: 0.6;
+}
+
+.todo-input:focus {
+    border-color: var(--cyan);
+    background: linear-gradient(145deg, #fff 0%, #f0f9ff 100%);
+    box-shadow:
+            10px 10px 0 var(--yellow),
+            0 0 0 8px rgba(0,212,255,0.3),
+            0 0 40px rgba(0,212,255,0.5),
+            20px 20px 40px rgba(0,0,0,0.25);
+    transform: translateY(-5px) rotate(-2deg) scale(1.02);
+}
+
+/* SUPER IMPONERENDE KNAP! 🚀 */
+.btn {
+    font-family: Impact, 'Arial Black', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    border: 6px solid #000;
+    border-radius: 20px;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.btn::before {
+    content: "⚡";
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    animation: lightning-left 1s ease infinite;
+}
+
+.btn::after {
+    content: "⚡";
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    animation: lightning-right 1s ease infinite;
+}
+
+@keyframes lightning-left {
+    0%, 100% { opacity: 1; transform: translateY(-50%) translateX(0) rotate(0deg); }
+    50% { opacity: 0.5; transform: translateY(-50%) translateX(-5px) rotate(-20deg) scale(1.3); }
+}
+
+@keyframes lightning-right {
+    0%, 100% { opacity: 1; transform: translateY(-50%) translateX(0) rotate(0deg); }
+    50% { opacity: 0.5; transform: translateY(-50%) translateX(5px) rotate(20deg) scale(1.3); }
+}
+
+.btn:hover {
+    transform: translateY(-8px) rotate(-4deg) scale(1.1);
+    animation: button-shake 0.5s ease infinite;
+}
+
+@keyframes button-shake {
+    0%, 100% { transform: translateY(-8px) rotate(-4deg) scale(1.1); }
+    25% { transform: translateY(-10px) rotate(-6deg) scale(1.12); }
+    50% { transform: translateY(-8px) rotate(-2deg) scale(1.1); }
+    75% { transform: translateY(-10px) rotate(-5deg) scale(1.11); }
+}
+
+.btn:active {
+    transform: translateY(3px) rotate(2deg) scale(0.98);
+}
+
+.btn-primary {
+    background:
+            repeating-linear-gradient(45deg, var(--red) 0%, var(--red) 10px, var(--yellow) 10px, var(--yellow) 20px, var(--green) 20px, var(--green) 30px),
+            linear-gradient(135deg, var(--red) 0%, var(--orange) 50%, var(--yellow) 100%);
+    background-size: 200% 200%, 100% 100%;
+    color: white;
+    text-shadow:
+            2px 2px 0 #000,
+            4px 4px 10px rgba(0,0,0,0.5);
+    box-shadow:
+            0 0 20px rgba(255,215,0,0.8),
+            8px 8px 0 var(--yellow),
+            16px 16px 0 var(--green),
+            16px 16px 40px rgba(0,0,0,0.3);
+    animation: button-rainbow 3s linear infinite;
+    border-color: #000;
+}
+
+@keyframes button-rainbow {
+    0%, 100% { background-position: 0% 50%, 0 0; }
+    50% { background-position: 100% 50%, 0 0; }
+}
+
+.btn-primary:hover {
+    box-shadow:
+            0 0 40px rgba(255,215,0,1),
+            0 0 60px rgba(255,20,147,0.8),
+            12px 12px 0 var(--cyan),
+            24px 24px 0 var(--pink),
+            24px 24px 60px rgba(0,0,0,0.4);
+}
+
+/* Toolbar */
+.todo-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.5rem;
+    background:
+            repeating-linear-gradient(90deg, var(--yellow) 0%, var(--yellow) 10px, var(--orange) 10px, var(--orange) 20px),
+            var(--yellow);
+    border-radius: 20px;
+    border: 5px solid var(--red);
+    box-shadow:
+            6px 6px 0 var(--green),
+            12px 12px 30px rgba(0,0,0,0.25);
+    animation: toolbar-pulse 3s ease infinite;
+}
+
+@keyframes toolbar-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+.todo-counter {
+    margin-left: auto;
+    font-weight: 900;
+    font-size: 1.5rem;
+    font-family: Impact, sans-serif;
+    color: var(--red);
+    text-shadow:
+            2px 2px 0 white,
+            4px 4px 10px rgba(0,0,0,0.3);
+    animation: counter-bounce 2s ease infinite;
+}
+
+@keyframes counter-bounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-3px) scale(1.05); }
+}
+
+.todo-counter::before {
+    content: "🍜 ";
+    animation: noodle-spin 4s linear infinite;
+    display: inline-block;
+}
+
+@keyframes noodle-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* List */
+.todo-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.2rem;
+}
+
+/* Item - Vietnamese Lantern Supreme! */
+.todo-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.2rem;
+    align-items: center;
+    background:
+            radial-gradient(circle at top left, rgba(255,255,255,1) 0%, rgba(255,245,225,1) 100%);
+    border: 6px solid var(--green);
+    border-radius: 25px;
+    padding: 1.2rem 1.5rem;
+    box-shadow:
+            0 0 15px rgba(0,166,81,0.4),
+            7px 7px 0 var(--pink),
+            14px 14px 30px rgba(0,0,0,0.2);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    animation: item-slide-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+}
+
+@keyframes item-slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(-100px) rotate(-15deg) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) rotate(0) scale(1);
+    }
+}
+
+.todo-item:hover {
+    transform: translateY(-8px) rotate(-2deg) scale(1.03);
+    box-shadow:
+            0 0 30px rgba(0,212,255,0.6),
+            10px 10px 0 var(--yellow),
+            20px 20px 50px rgba(0,0,0,0.3);
+    border-color: var(--cyan);
+    animation: item-wiggle 0.5s ease infinite;
+}
+
+@keyframes item-wiggle {
+    0%, 100% { transform: translateY(-8px) rotate(-2deg) scale(1.03); }
+    25% { transform: translateY(-10px) rotate(-3deg) scale(1.04); }
+    50% { transform: translateY(-8px) rotate(-1deg) scale(1.03); }
+    75% { transform: translateY(-9px) rotate(-2.5deg) scale(1.035); }
+}
+
+.todo-item:nth-child(even) {
+    transform: rotate(2deg);
+    border-color: var(--orange);
+}
+
+.todo-item:nth-child(odd) {
+    transform: rotate(-2deg);
+    border-color: var(--purple);
+}
+
+/* Custom checkbox - Vietnamese Coffee Power! */
+.checkbox {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    border: 5px solid var(--orange);
+    background: linear-gradient(145deg, #fff 0%, #fffef8 100%);
+    box-shadow:
+            4px 4px 0 var(--red),
+            8px 8px 20px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.checkbox:hover {
+    transform: rotate(15deg) scale(1.15);
+    box-shadow:
+            6px 6px 0 var(--yellow),
+            0 0 20px rgba(255,215,0,0.8);
+    border-color: var(--cyan);
+}
+
+.checkbox input {
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    outline: none;
+    cursor: pointer;
+}
+
+.checkbox .tick {
+    position: absolute;
+    inset: 5px;
+    border-radius: 8px;
+    background:
+            repeating-linear-gradient(45deg, var(--green) 0%, var(--green) 10px, var(--cyan) 10px, var(--cyan) 20px),
+            linear-gradient(135deg, var(--green) 0%, var(--cyan) 100%);
+    background-size: 200% 200%, 100% 100%;
+    opacity: 0;
+    transform: scale(0) rotate(-360deg);
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: tick-rainbow 2s linear infinite;
+}
+
+@keyframes tick-rainbow {
+    0%, 100% { background-position: 0% 50%, 0 0; }
+    50% { background-position: 100% 50%, 0 0; }
+}
+
+.checkbox .tick::after {
+    content: "✓";
+    color: white;
+    font-size: 2rem;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.checkbox input:checked + .tick {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    box-shadow:
+            0 0 20px rgba(0,166,81,0.8),
+            inset 0 0 10px rgba(255,255,255,0.3);
+}
+
+/* Title */
+.todo-title {
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: #222;
+    text-shadow:
+            1px 1px 0 rgba(255,205,0,0.5),
+            2px 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+/* Completed state - MEGA PARTY! */
+.completed {
+    border-color: var(--green);
+    background:
+            repeating-linear-gradient(45deg, rgba(0,166,81,0.1) 0px, rgba(0,166,81,0.1) 20px, rgba(34,197,94,0.15) 20px, rgba(34,197,94,0.15) 40px),
+            linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    animation: complete-celebration 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes complete-celebration {
+    0% { transform: scale(1) rotate(0deg); }
+    10% { transform: scale(1.2) rotate(-10deg); }
+    20% { transform: scale(0.9) rotate(10deg); }
+    30% { transform: scale(1.15) rotate(-8deg); }
+    40% { transform: scale(0.95) rotate(8deg); }
+    50% { transform: scale(1.1) rotate(-5deg); }
+    60% { transform: scale(0.97) rotate(5deg); }
+    70% { transform: scale(1.05) rotate(-3deg); }
+    80% { transform: scale(0.98) rotate(3deg); }
+    90% { transform: scale(1.02) rotate(-1deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+.completed .todo-title {
+    color: var(--green);
+    text-decoration: line-through;
+    text-decoration-thickness: 4px;
+    text-decoration-color: var(--red);
+    text-decoration-style: wavy;
+    text-shadow:
+            1px 1px 0 rgba(0,166,81,0.3),
+            2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.completed::after {
+    content: "🎉🎊✨";
+    position: absolute;
+    right: 1rem;
+    font-size: 2.5rem;
+    animation: celebrate-explosion 2s ease infinite;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+}
+
+@keyframes celebrate-explosion {
+    0%, 100% { transform: rotate(0deg) scale(1); opacity: 1; }
+    25% { transform: rotate(90deg) scale(1.3); opacity: 0.8; }
+    50% { transform: rotate(180deg) scale(1.1); opacity: 1; }
+    75% { transform: rotate(270deg) scale(1.4); opacity: 0.7; }
+}
+
+/* Empty state */
+.empty {
+    margin: 1.5rem 0;
+    padding: 3rem;
+    text-align: center;
+    color: var(--orange);
+    border: 6px dashed var(--pink);
+    border-radius: 30px;
+    background:
+            repeating-radial-gradient(circle at center, transparent 0, white 15px, transparent 30px, rgba(255,245,225,0.5) 45px),
+            linear-gradient(135deg, #fff 0%, #fff5e1 100%);
+    font-size: 1.6rem;
+    font-weight: 900;
+    box-shadow:
+            inset 0 0 40px rgba(255,107,53,0.3),
+            8px 8px 0 rgba(255,20,147,0.3),
+            16px 16px 40px rgba(0,0,0,0.2);
+    animation: empty-float 4s ease-in-out infinite;
+}
+
+@keyframes empty-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+.empty::before {
+    content: "🥢🍜🏮";
+    display: block;
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    animation: chopstick-dance 1.5s ease infinite;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+}
+
+@keyframes chopstick-dance {
+    0%, 100% { transform: rotate(-15deg) scale(1); }
+    25% { transform: rotate(15deg) scale(1.1); }
+    50% { transform: rotate(-10deg) scale(1.05); }
+    75% { transform: rotate(10deg) scale(1.08); }
+}
+
+/* Small screens */
+@media (max-width: 640px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    .btn-primary {
+        font-size: 1.3rem;
+        padding: 0.8rem 1.5rem;
+    }
+
+    .todo-item {
+        grid-template-columns: auto 1fr;
+    }
+
+    .todo-toolbar {
+        flex-direction: column;
+    }
+
+    .todo-counter {
+        margin-left: 0;
+    }
+}

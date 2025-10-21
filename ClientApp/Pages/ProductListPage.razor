@@ -1,0 +1,70 @@
+@page "/products"
+@using Blazored.LocalStorage
+@using ClientApp.Model
+@inject ILocalStorageService localStore
+@inject NavigationManager navManager
+
+<h1 class="mb-3 mt-3">Product List</h1>
+
+@if (loggedInUser != null && loggedInUser.Role == "admin")
+{
+    <button class="btn btn-success mb-3" @onclick="AddNewProduct">+ Add Product</button>
+}
+
+@if (productList.Any())
+{
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var p in productList)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.Category</td>
+                <td>@p.Price kr</td>
+                <td>@p.Stock</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p><em>Ingen produkter endnu...</em></p>
+}
+
+@code {
+    private List<Product> productList = new();
+    private User? loggedInUser;
+    protected override async Task OnInitializedAsync()
+    {
+        loggedInUser = await localStore.GetItemAsync<User>("user");
+        var storedList = await localStore.GetItemAsync<List<Product>>("productList");
+        if (loggedInUser == null || loggedInUser.Role != "admin")
+        {
+            productList = storedList.Where(p => p.Price <= 10000).ToList();
+        }
+        else
+        {
+            productList = storedList;
+        }
+        
+    }
+
+    private void AddNewProduct()
+    {
+        navManager.NavigateTo("/add-product");
+    }
+    
+
+    
+
+  
+}

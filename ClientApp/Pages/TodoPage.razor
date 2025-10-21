@@ -1,0 +1,69 @@
+
+@page "/TodoPage"
+@inject HttpClient Http
+@using ClientApp.Logic
+
+<div class="todo-card">
+    <h1>Todo (@CountMissing() mangler)</h1>
+
+    <div class="todo-input-row">
+        <InputText @bind-Value="newTodoTitle" placeholder="Skriv en ny todo" class="todo-input"></InputText>
+        <button class="btn btn-primary" @onclick="AddTodo">Opret</button>
+    </div>
+
+    <div class="todo-toolbar">
+        <span class="todo-counter">@myTodos.Count opgaver i alt</span>
+    </div>
+
+    @if (myTodos.Count == 0)
+    {
+        <div class="empty">
+            Ingen todos endnu. Opret en for at komme i gang!
+        </div>
+    }
+    else
+    {
+        <ul class="todo-list">
+            @foreach (TodoItem todo in myTodos)
+            {
+                <li class="todo-item @(todo.IsDone ? "completed" : "")">
+                    <label class="checkbox">
+                        <InputCheckbox @bind-Value="todo.IsDone"></InputCheckbox>
+                        <span class="tick"></span>
+                    </label>
+                    <span class="todo-title">@todo.Title</span>
+                </li>
+            }
+        </ul>
+    }
+</div>
+
+@code {
+    
+    List<TodoItem> myTodos = new();
+
+    string newTodoTitle = "";
+
+    protected override void OnInitialized()
+    {
+        myTodos.Add(new TodoItem { IsDone = true, Title = "Lektier" });
+        myTodos.Add(new TodoItem { IsDone = false, Title = "Flere Lektier" });
+    }
+
+    private void AddTodo()
+    {
+        TodoItem newTD = new TodoItem { IsDone = false, Title = newTodoTitle };
+        newTodoTitle = "";
+        myTodos.Add(newTD);
+    }
+    //retur : antal ikke done items i myTodos
+    private int CountMissing()
+    {
+        int result = 0;
+        foreach(TodoItem t in myTodos)
+            if (!t.IsDone)
+                result++;
+        return result;
+    }
+
+}

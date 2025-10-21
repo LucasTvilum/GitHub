@@ -1,0 +1,93 @@
+﻿@page "/aflevering2Items"
+@inject Blazored.LocalStorage.ILocalStorageService localStore
+<h3>Aflevering 2 — Varer</h3>
+
+<div style="margin-bottom: 1rem;">
+    <label>
+        Farvefilter (kommasepareret):
+        <input @bind="colorFilter" placeholder="fx: red, blue, white" />
+    </label>
+    <label style="margin-left: 1rem;">
+        <input type="checkbox" @bind="onlyInStock" />
+        Kun på lager
+    </label>
+</div>
+
+@if (!FilteredItems.Any())
+{
+    <p>Ingen varer matcher dine filtre.</p>
+}
+else
+{
+    <table>
+        <thead>
+        <tr>
+            <th>Navn</th>
+            <th>Pris</th>
+            <th>Lager</th>
+            <th>Farve</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in FilteredItems)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price.ToString("0.00") kr.</td>
+                <td>@item.Stock</td>
+                <td>@item.Color</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    
+    private sealed class Item
+    {
+        public string Name { get; init; } = "";
+        public double Price { get; init; }
+        public int Stock { get; init; }
+        public string Color { get; init; } = "";
+    }
+
+    private List<Item> items =
+    [
+        new() { Name = "Monster",  Price = 15.00, Stock = 100, Color = "White" },
+        new() { Name = "Amber",    Price = 6.95,  Stock = 69,  Color = "Red" },
+        new() { Name = "Celsius",  Price = 12.00, Stock = 0,   Color = "Off white" },
+        new() { Name = "Booster",  Price = 18.00, Stock = 250, Color = "Green" },
+        new() { Name = "RedBull",  Price = 19.95, Stock = 800, Color = "Blue" },
+    ];
+
+    private string? colorFilter;
+    private bool onlyInStock;
+
+    private IEnumerable<Item> FilteredItems
+    {
+        get
+        {
+            IEnumerable<Item> query = items;
+
+            if (onlyInStock)
+                query = query.Where(i => i.Stock > 0);
+
+            var colors = ParseColors(colorFilter);
+            if (colors.Length > 0)
+            {
+                query = query.Where(i =>
+                    !string.IsNullOrEmpty(i.Color) && colors.Any(c => string.Equals(i.Color, c, StringComparison.OrdinalIgnoreCase)));
+            }
+
+            return query;
+        }
+        
+    }
+
+    private static string[] ParseColors(string? input) =>
+        string.IsNullOrWhiteSpace(input)
+            ? Array.Empty<string>()
+            : input.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+ 
+} 

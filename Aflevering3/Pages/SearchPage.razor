@@ -1,0 +1,80 @@
+@* Alle opgaver lavet - Lucas Tvilum *@
+@page "/search"
+@inject HttpClient Http
+
+<h3>SearchPage</h3>
+
+<input @bind="searchText" placeholder="Skriv et ord..." />
+
+<button @onclick="StarterMed">Starter med</button>
+<button @onclick="Indenholder">Indeholder</button>
+
+<p>@resultText</p>
+
+@if (viewedWords != null)
+{
+    <ul>
+        @foreach (var w in viewedWords.Take(wordsToShow))
+        {
+            <li>@w</li>
+        }
+    </ul>
+
+    @if (viewedWords.Length > wordsToShow)
+    {
+        <button @onclick="ShowMore">flere...</button>
+    }
+}
+else
+{
+    <p>Indlæser...</p>
+}
+
+@code {
+    string[]? allWords;
+    string[]? viewedWords;
+    string searchText = "";
+    string resultText = "";
+    int wordsToShow = 10;
+
+    protected override async Task OnInitializedAsync()
+    {
+        allWords = await LoadAllWords();
+        viewedWords = allWords.Take(100).ToArray();
+    }
+
+    private async Task<string[]> LoadAllWords()
+    {
+        string content = await Http.GetStringAsync("sample-data/words.txt");
+        return content.Split("\n", StringSplitOptions.RemoveEmptyEntries);
+    }
+
+    private void StarterMed()
+    {
+        if (allWords == null) return;
+
+        viewedWords = allWords
+            .Where(w => w.StartsWith(searchText, StringComparison.OrdinalIgnoreCase))
+            .ToArray();
+
+        wordsToShow = 10;
+        resultText = $"Der er {viewedWords.Length} ord som starter med {searchText}";
+    }
+
+    private void Indenholder()
+    {
+        if (allWords == null) return;
+
+        viewedWords = allWords
+            .Where(w => w.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+            .ToArray();
+
+        wordsToShow = 10;
+        resultText = $"Der er {viewedWords.Length} ord som indeholder {searchText}";
+    }
+
+    private void ShowMore()
+    {
+        wordsToShow += 10;
+    }
+}

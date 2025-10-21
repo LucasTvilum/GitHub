@@ -1,0 +1,76 @@
+@inject ClientApp.Components.SunService Sun
+
+<div class="top-corner">
+    <span class="fw-bold">Now: 
+        @if (ShowDate)
+        {
+            @currentTime.ToShortDateString()
+        }
+        @if (ShowDate && ShowTime)
+        {
+            <span>&nbsp;-&nbsp;</span>
+        }
+        @if (ShowTime)
+        {
+            @currentTime.ToLongTimeString()
+        }
+    </span>
+    <br/>
+
+    @if (isLoading)
+    {
+        <span class="fw-bolder">Sol: Indlæser...</span>
+    }
+    else if (hasError)
+    {
+        <span class="fw-bolder">Sol: (kunne ikke hentes)</span>
+    }
+    else
+    {
+        <span class="fw-bolder">Sol: @sunrise.ToShortTimeString() - @sunset.ToShortTimeString()</span>
+    }
+</div>
+
+@code {
+    [Parameter] public bool ShowDate { get; set; } = true;
+    [Parameter] public bool ShowTime { get; set; } = true;
+
+    DateTime currentTime = DateTime.Now;
+    DateTime sunrise;
+    DateTime sunset;
+
+    bool isLoading = true;
+    bool hasError = false;
+       
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var (s, e) = await Sun.GetSunriseSunsetAsync(56.1567, 10.2108, DateTime.Now);
+            sunrise = s;
+            sunset = e;
+            hasError = false;
+        }
+        catch
+        {
+            hasError = true;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+
+        // Start timer uden at blokere render-livscyklus
+        _ = TimeTicker();
+    }
+       
+    async Task TimeTicker()
+    {
+        var secondTimer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+        while (await secondTimer.WaitForNextTickAsync())
+        {
+            currentTime = DateTime.Now;
+            StateHasChanged();
+        }
+    }
+}

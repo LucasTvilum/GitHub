@@ -1,0 +1,58 @@
+@page "/dice"
+@using ClientApp.Models
+
+<PageTitle>Dice</PageTitle>
+
+<h1>Dice</h1>
+
+<div class="dice-row">
+    <img class="die" src="@GetDieImage(die1)" alt="Die 1"/>
+    <img class="die" src="@GetDieImage(die2)" alt="Die 2"/>
+    <img class="die" src="@GetDieImage(die3)" alt="Die 3"/>
+    <img class="die" src="@GetDieImage(die4)" alt="Die 4"/>
+    <img class="die" src="@GetDieImage(die5)" alt="Die 5"/>
+    <img class="die" src="@GetDieImage(die6)" alt="Die 6"/>
+</div>
+
+<button class="btn btn-primary" @onclick="Roll">Roll</button>
+
+<select class="form-select w-auto mt-3" @bind="diceCount">
+    @for (int i = 1; i <= 6; i++)
+    {
+        <option value="@i">@i</option>       
+    }
+</select>
+
+<div class="dice-row mt-3">
+    @for (int i = 0; i < diceCount; i++)
+    {
+        <img class="die" src="@GetDieImage(Values[i])" alt="Die @Values[i]" />
+    }
+</div>
+
+@code {
+    private Dice d1 = new(), d2 = new(), d3 = new(), d4 = new(), d5 = new(), d6 = new();
+    private int die1 = 1, die2 = 1, die3 = 1, die4 = 1, die5 = 1, die6 = 1;
+
+    private int diceCount = 2;
+    private int[] Values => new[] { die1, die2, die3, die4, die5, die6 };
+
+    protected override void OnInitialized()
+    {
+        Roll();
+    }
+
+    private void Roll()
+    {
+        die1 = d1.Roll();
+        die2 = d2.Roll();
+        die3 = d3.Roll();
+        die4 = d4.Roll();
+        die5 = d5.Roll();
+        die6 = d6.Roll();
+    }
+
+
+    private string GetDieImage(int value) => $"images/dice/die-{value}.png";
+}
+}

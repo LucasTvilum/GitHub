@@ -1,0 +1,99 @@
+@page "/add-product"
+@using ClientApp.Model
+@inject Blazored.LocalStorage.ILocalStorageService localStore
+@inject NavigationManager navManager
+
+<h1 class="mb-3 mt-3">Add Product</h1>
+
+<EditForm Model="@aProduct" OnValidSubmit="@HandleSubmit" class="row p-3">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="col-12 mb-3">
+        <button type="button" class="btn btn-secondary" @onclick="ResetForm">Reset</button>
+    </div>
+
+    <div class="col-md-12 mb-3">
+        <label for="Name">Name</label>
+        <InputText id="Name" @bind-Value="aProduct.Name" class="form-control" />
+        <ValidationMessage For="@(() => aProduct.Name)" />
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="Price">Price</label>
+        <InputNumber id="Price" @bind-Value="aProduct.Price" class="form-control" />
+        <ValidationMessage For="@(() => aProduct.Price)" />
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="PublishedDate">Published Date</label>
+        <InputDate id="PublishedDate" @bind-Value="aProduct.PublishedDate" class="form-control" />
+    </div>
+
+    <div class="col-12 mb-3">
+        <label for="Category">Category</label>
+        <InputSelect id="Category" @bind-Value="aProduct.Category" class="form-control">
+            <option value="">-- Vælg kategori --</option>
+            <option value="computer">Computer</option>
+            <option value="audio">Headset</option>
+            <option value="video">Camera</option>
+            <option value="memory">Phone</option>
+            <option value="other">Other</option>
+        </InputSelect>
+        <ValidationMessage For="@(() => aProduct.Category)" />
+    </div>
+
+    <div class="col-md-12 mb-3">
+        <label for="Description">Description</label>
+        <InputTextArea id="Description" @bind-Value="aProduct.Description" class="form-control" />
+        <ValidationMessage For="@(() => aProduct.Description)" />
+    </div>
+
+    <div class="col-12 mb-3">
+        <label for="Stock">Stock</label>
+        <InputNumber id="Stock" @bind-Value="aProduct.Stock" class="form-control"></InputNumber>
+        <ValidationMessage For="@(() => aProduct.Stock)" />
+    </div>
+
+    <div class="col-6 mb-3">
+        <label for="IsPublished">Is Published</label>
+        <InputCheckbox id="IsPublished" @bind-Value="aProduct.IsPublished"></InputCheckbox>
+    </div>
+
+    <div class="col-12 mb-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</EditForm>
+
+@code {
+    private Product aProduct = new();
+    private void ResetForm()
+    {
+        aProduct = new Product();
+    }
+
+    private async Task HandleSubmit()
+    {
+        // Hent tidligere liste fra localStorage
+        var productList = await localStore.GetItemAsync<List<Product>>("productList") ?? new List<Product>();
+
+        // Tilføj produkt
+        productList.Add(new Product
+        {
+            Id = productList.Count + 1,
+            Name = aProduct.Name,
+            Price = aProduct.Price,
+            Description = aProduct.Description,
+            PublishedDate = aProduct.PublishedDate,
+            IsPublished = aProduct.IsPublished,
+            Stock = aProduct.Stock,
+            Category = aProduct.Category
+        });
+
+        // Gem i localStorage
+        await localStore.SetItemAsync("productList", productList);
+
+        // Navigér til produktlisten
+        navManager.NavigateTo("/products");
+    }
+}

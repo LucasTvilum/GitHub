@@ -1,0 +1,149 @@
+/* css */
+/* Komponentens “baggrund” og spacing */
+:host {
+    display: block;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(135deg, #0b0f19 0%, #0f1424 60%, #141b2e 100%);
+    color: #e6ecff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+/* Neon-overskrift */
+h3 {
+    margin: 0 0 1rem 0;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #00e5ff; /* cyan neon */
+    text-shadow: 0 0 8px rgba(0,229,255,.8), 0 0 18px rgba(0,229,255,.35);
+}
+
+/* Filterblokken (div lige efter h3) som “glas-kort” */
+h3 + div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.25rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+/* Labels i filterblokken */
+h3 + div > label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #cfe6ff;
+    font-weight: 600;
+}
+
+/* Input (tekst) – neon focus */
+h3 + div input[type="text"],
+h3 + div input:not([type]) {
+    padding: 0.5rem 0.65rem;
+    min-width: 260px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 8px;
+    outline: none;
+    background: #0f1525;
+    color: #eaf2ff;
+    transition: box-shadow .18s ease, border-color .18s ease, transform .08s ease;
+}
+
+h3 + div input[type="text"]::placeholder,
+h3 + div input:not([type])::placeholder {
+    color: #8aa5c8;
+}
+
+h3 + div input[type="text"]:focus,
+h3 + div input:not([type]):focus {
+    border-color: #00ffa6;
+    box-shadow: 0 0 0 3px rgba(0,255,166,.18), 0 0 16px rgba(0,255,166,.25);
+    transform: translateY(-1px);
+}
+
+/* Checkbox – simple “energi” tone */
+h3 + div input[type="checkbox"] {
+    width: 1.05rem;
+    height: 1.05rem;
+    accent-color: #ff2bd6; /* hot pink */
+    box-shadow: 0 0 10px rgba(255,43,214,.25);
+}
+
+/* Tom-tilstand */
+> p {
+    margin-top: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: #a8c3ea;
+    background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px;
+}
+
+/* Tabel-container (kan fjerne hvis du ikke vil have shadow/kant) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #0d1221;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 24px rgba(0,0,0,.35), 0 0 0 1px rgba(0,0,0,.4) inset;
+}
+
+/* Header – neon gradient */
+thead th {
+    text-align: left;
+    padding: 0.85rem 1rem;
+    font-weight: 800;
+    letter-spacing: .3px;
+    color: #f4f9ff;
+    background: linear-gradient(90deg, rgba(0,229,255,.22), rgba(255,43,214,.22));
+    border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+/* Celler */
+tbody td {
+    padding: 0.75rem 1rem;
+    color: #dbe8ff;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+/* Zebra + hover-effekt med subtle glow */
+tbody tr:nth-child(even) {
+    background: rgba(255,255,255,.02);
+}
+
+tbody tr:hover {
+    background: rgba(0,229,255,.07);
+    box-shadow: inset 0 0 0 9999px rgba(0,229,255,.05);
+}
+
+/* Højrejustér pris og lager + monospaced feel */
+tbody td:nth-child(2),
+tbody td:nth-child(3) {
+    font-variant-numeric: tabular-nums;
+    color: #c6ffdd;
+}
+
+/* Farve-kolonnen som “badge” */
+tbody td:last-child {
+    font-weight: 700;
+    letter-spacing: .2px;
+    color: #00ffa6;
+    text-shadow: 0 0 8px rgba(0,255,166,.4);
+}
+
+/* Subtile row-entrance animation (valgfri) */
+tbody tr {
+    transition: background .15s ease, box-shadow .15s ease, transform .06s ease;
+}
+
+tbody tr:active {
+    transform: scale(0.998);
+}
