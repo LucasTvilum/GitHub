@@ -10,6 +10,13 @@ public class WeatherForecastController : ControllerBase
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
+    
+    private static readonly string[] Locations = new[]
+    {
+       "Somalia", "Denmark", "Norway", "Sweden", "Finland", "Germany", "Italy", "Spain", "France", "Austria"
+    };
+
+
 
     private readonly ILogger<WeatherForecastController> _logger;
 
@@ -33,7 +40,8 @@ public class WeatherForecastController : ControllerBase
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)],
+                Location = Locations[Random.Shared.Next(Locations.Length)]
             })
             .ToArray();
     }

@@ -1,6 +1,7 @@
 @page "/products"
 @using Blazored.LocalStorage
 @using ClientApp.Model
+@using Core.Models
 @inject ILocalStorageService localStore
 @inject NavigationManager navManager
 
@@ -41,6 +42,8 @@ else
 }
 
 @code {
+    private TodoItem[]? items;
+    
     private List<Product> productList = new();
     private User? loggedInUser;
     protected override async Task OnInitializedAsync()

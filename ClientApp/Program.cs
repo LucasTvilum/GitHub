@@ -2,11 +2,20 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using ClientApp;
 using Blazored.LocalStorage;
-var builder = WebAssemblyHostBuilder.CreateDefault(args);
-builder.Services.AddBlazoredLocalStorage();
-builder.RootComponents.Add<App>("#app");
-builder.RootComponents.Add<HeadOutlet>("head::after");
+using ClientApp.Service;
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+    var builder = WebAssemblyHostBuilder.CreateDefault(args);
+    builder.RootComponents.Add<App>("#app");
+    builder.RootComponents.Add<HeadOutlet>("head::after");
 
-await builder.Build().RunAsync();
+    builder.Services.AddSingleton(new HttpClient
+    {
+        BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) 
+        
+    });
+
+    builder.Services.AddBlazoredLocalStorage();
+
+    builder.Services.AddSingleton<ITodoService, ToDoServiceHttp>();
+    await builder.Build().RunAsync();
+

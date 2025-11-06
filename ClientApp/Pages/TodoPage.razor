@@ -1,69 +1,93 @@
-
 @page "/TodoPage"
 @inject HttpClient Http
-@using ClientApp.Logic
+@using ClientApp.Service
+@using Core.Models
 
-<div class="todo-card">
-    <h1>Todo (@CountMissing() mangler)</h1>
+<h1>Todo (@CountMissing() mangler)</h1>
 
-    <div class="todo-input-row">
-        <InputText @bind-Value="newTodoTitle" placeholder="Skriv en ny todo" class="todo-input"></InputText>
-        <button class="btn btn-primary" @onclick="AddTodo">Opret</button>
-    </div>
-
-    <div class="todo-toolbar">
-        <span class="todo-counter">@myTodos.Count opgaver i alt</span>
-    </div>
-
-    @if (myTodos.Count == 0)
-    {
-        <div class="empty">
-            Ingen todos endnu. Opret en for at komme i gang!
-        </div>
-    }
-    else
-    {
-        <ul class="todo-list">
-            @foreach (TodoItem todo in myTodos)
-            {
-                <li class="todo-item @(todo.IsDone ? "completed" : "")">
-                    <label class="checkbox">
-                        <InputCheckbox @bind-Value="todo.IsDone"></InputCheckbox>
-                        <span class="tick"></span>
-                    </label>
-                    <span class="todo-title">@todo.Title</span>
-                </li>
-            }
-        </ul>
-    }
+<div class="todo-input-row">
+    <InputText @bind-Value="newTodoTitle" placeholder="Skriv en ny todo"></InputText>
+    <button class="btn btn-primary" @onclick="AddTodo">Opret</button>
 </div>
 
+<ul>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="row">ToDo</th>
+            <th scope="row">Number</th>
+            <th scope="row">IsDone</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+        @if (todos != null)
+        {
+            
+            foreach (TodoItem todo in todos)
+            {
+                <tr>
+                    <th scope="col">@todo?.Title</th>    
+                    <th scope="col">@todo?.IsDone</th>
+                    <div class="col-12 mb-3">
+                        <button class="btn btn-primary" @onclick="() => Delete(todo)">Delete</button>
+                    </div>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+
+</ul>
+
+
 @code {
+   private TodoItem[]? items;
+    [Inject]
+    private ITodoService todoservice { get; set; }
     
-    List<TodoItem> myTodos = new();
+    private List<TodoItem> todos = new();
+    private string newTodoTitle = "";
+    private TodoItem[]? todolistimport;
+    
 
-    string newTodoTitle = "";
-
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        myTodos.Add(new TodoItem { IsDone = true, Title = "Lektier" });
-        myTodos.Add(new TodoItem { IsDone = false, Title = "Flere Lektier" });
+        items = await todoservice.GetAll();
+        await LoadTodos();
     }
 
-    private void AddTodo()
+    private async Task LoadTodos()
     {
-        TodoItem newTD = new TodoItem { IsDone = false, Title = newTodoTitle };
-        newTodoTitle = "";
-        myTodos.Add(newTD);
-    }
-    //retur : antal ikke done items i myTodos
-    private int CountMissing()
-    {
-        int result = 0;
-        foreach(TodoItem t in myTodos)
-            if (!t.IsDone)
-                result++;
-        return result;
+        todolistimport = await todoservice.GetAll();
+        if (todolistimport != null)
+        {
+            todos = todolistimport.ToList();
+        }
     }
 
+    private async Task AddTodo()
+    {
+      if (newTodoTitle != "")
+      {
+          TodoItem newtodo = new TodoItem { IsDone = false, Title = newTodoTitle};
+          await todoservice.Add(newtodo);
+      }
+
+      await LoadTodos();
+      StateHasChanged();
+    }
+   
+
+    private async Task Delete(TodoItem t)
+    {
+       Console.WriteLine("gg");
+
+       await todoservice.Delete(t.Id);
+       await LoadTodos();
+       StateHasChanged();
+    }
+
+    private int CountMissing() => todos.Count(x => !x.IsDone);
 }

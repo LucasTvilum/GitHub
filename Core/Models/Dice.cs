@@ -1,4 +1,4 @@
-namespace ClientApp.Models;
+namespace Core.Models;
 
 public class Dice
 {
